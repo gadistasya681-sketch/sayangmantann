@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  color: rgba(255, 105, 180, 0.5);
+  font-size: 20px;
+  animation: floatUp 8s linear infinite;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 20px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: "Pacifico", cursive;
+  color: #ff4d88;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.buttons {
+  position: relative;
+  height: 120px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#yesBtn {
+  background: #ff4d88;
+  color: white;
+}
+
+#yesBtn:hover {
+  background: #ff2f73;
+}
+
+#noBtn {
+  background: #ccc;
+  color: #333;
+  position: absolute;
+  left: 50%;
+  top: 60px;
+  transform: translateX(-50%);
+}
+
+/* Second page */
+#lovePage {
+  display: none;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.signature {
+  margin-top: 20px;
+  font-style: italic;
+  color: #888;
+}
+
+/* Scroll fix for long text */
+.content {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+</style>
+</head>
+<body>
+
+
+<!-- Floating hearts -->
+<script>
+for (let i = 0; i < 20; i++) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+  heart.style.fontSize = (14 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+}
+</script>
+
+<div class="card" id="questionPage">
+  <!-- GANTI NAMA & PERTANYAAN DI SINI -->
+  <h1>Noah, kamu sayang aku? 💕</h1>
+
+  <div class="buttons" id="buttonArea">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+</div>
+
+<div class="card" id="lovePage">
+  <h1>Happy Valentine’s Day, Noah 🤍</h1>
+  <div class="content">
+    <!-- GANTI TEKS PANJANG DI SINI -->
+    <p>
+      Honestly, I don’t even know where to start. There are so many things I want to say, but I’ll try to keep it simple and honest. Thank you for being someone who once made my days feel lighter, my laughs feel louder, and my heart feel warmer. You might not realize it, but the little things you do, the way you talk, the way you exist in my life, they all mean more to me than I can explain.
+    </p>
+    <p>
+      With you, I learned what it feels like to care about someone deeply. I learned how small moments can become precious memories. Even on days when things aren’t perfect, thinking about you somehow still makes everything feel a bit better.
+    </p>
+    <p>
+      I don’t know what the future will look like, but today, I just want you to know this: you are special to me. You always have been. And maybe you always will be, in one way or another.
+    </p>
+    <p>
+      So this is just a small message, but it comes from a sincere heart. Thank you for being you. Thank you for existing. And thank you for the memories, the smiles, and the feelings that I’ll always keep.
+    </p>
+
+    <div class="signature">With love, Gadis Imup</div>
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const buttonArea = document.getElementById("buttonArea");
+const yesBtn = document.getElementById("yesBtn");
+const questionPage = document.getElementById("questionPage");
+const lovePage = document.getElementById("lovePage");
+
+// Make "No" button escape but stay inside the white box
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
+
+function moveNoButton() {
+  const areaRect = buttonArea.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const maxX = areaRect.width - btnRect.width;
+  const maxY = areaRect.height - btnRect.height;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.style.transform = "translate(0, 0)";
+}
+
+// Yes button
+yesBtn.addEventListener("click", () => {
+  questionPage.style.display = "none";
+  lovePage.style.display = "block";
+
+  
+});
+</script>
+
+</body>
+</html>
